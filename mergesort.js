@@ -13,29 +13,31 @@ function split(wholeArray) {
 
 function merge(arr1, arr2) {
   let mergedArray = [];
-  if (arr1.length === arr2.length) {
-    for (let i = 0; i < arr1.length; i++) {
-      if (arr1[i] > arr2[i]) {
-        mergedArray.push(arr2[i], arr1[i]);
-      } else {
-        mergedArray.push(arr1[i], arr2[i]);
-      }
-    }
-    
-  } else {
-      for (let i = 0; i < arr2.length; i++) {
-        if (arr1[i] === undefined) {
-          mergedArray.push(arr2[i]);
-        }
-        else if (arr1[i] > arr2[i]) {
-          mergedArray.push(arr2[i], arr1[i]);
-        } else {
-          mergedArray.push(arr1[i], arr2[i]);
-      }
 
+  let arr1Counter = 0;
+  let arr2Counter = 0;
+  while (arr1Counter < arr1.length && arr2Counter < arr2.length) {
+    if (arr1[arr1Counter] > arr2[arr2Counter]) {
+      mergedArray.push(arr2[arr2Counter]);
+      arr2Counter++;
+    }
+    else {
+      mergedArray.push(arr1[arr1Counter]);
+      arr1Counter++;
     }
   }
 
-  return mergedArray;
+  return mergedArray.concat(arr1.slice(arr1Counter)).concat(arr2.slice(arr2Counter));
+}
+
+function mergeSort(array) {
+  if (array.length < 2) {
+    return array;
+  }
+      let splitArray = split(array);
+      let split1 = splitArray[0];
+      let split2 = splitArray[1];
+
+      return merge(mergeSort(split1), mergeSort(split2));
 
 }
