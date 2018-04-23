@@ -31,7 +31,7 @@ function merge(arr1, arr2) {
 }
 
 function mergeSort(array) {
-  if (array.length < 2) {
+  if (array.length === 1) {
     return array;
   }
       let splitArray = split(array);
